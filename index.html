@@ -1,0 +1,40 @@
+<body onload="start()">
+    
+<table id="tabela">
+
+    <tr>
+        <th>Nome</th>
+        <th>Score</th>        
+    </tr>
+
+</table>
+
+</body>
+
+<script>
+
+var table = document.getElementById("tabela");
+
+function start() {
+    var aa
+    let url = 'https://dsm-devweb3-arthurcarrenho-default-rtdb.firebaseio.com/ranking.json'
+    fetch(url)
+    .then(res => res.json())
+    .then(out =>   
+        update(out)
+    )
+    .catch(err => { throw err });
+    }
+    
+    function update(arg) {
+        let toup = Object.entries(arg)
+        for (index in toup) {
+            var row = table.insertRow(1);
+            var cell1 = row.insertCell(0);
+            var cell2 = row.insertCell(1);
+            cell1.innerHTML = toup[index][0];
+            cell2.innerHTML = toup[index][1];
+        }
+    }
+
+</script>
